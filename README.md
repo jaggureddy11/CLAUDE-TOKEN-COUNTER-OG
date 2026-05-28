@@ -1,7 +1,6 @@
-<h1 align="center">
-  <img src="./icons/claude-star.png" width="40" height="40" style="vertical-align: middle; margin-right: 10px;">
-  CLAUDE TOKEN COUNTER
-</h1>
+<p align="center">
+  <img src="./icons/title.svg" alt="CLAUDE TOKEN COUNTER" width="600">
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/github/package-json/v/jaggureddy11/CLAUDE-TOKEN-COUNTER?style=for-the-badge&color=2c84db&label=Version" alt="Release Version">
