@@ -71,14 +71,14 @@ graph TD
 ## 📦 Installation
 
 ### 🌐 Chromium-based (Chrome, Edge, Brave, Opera)
-1. Download [`claude-counter-0.4.2.zip`](../../releases/download/v0.4.2/claude-counter-0.4.2.zip).
+1. Download [`claude-counter-0.4.2.zip`](https://github.com/she-llac/claude-counter/releases/download/v0.4.2/claude-counter-0.4.2.zip).
 2. Extract the contents to a local folder of your choice.
 3. Open your browser and navigate to `chrome://extensions`.
 4. Toggle **Developer mode** on in the top-right corner.
 5. Click **Load unpacked** in the top-left and select the extracted folder.
 
 ### 🦊 Firefox
-1. Download [`claude-counter-0.4.2.xpi`](../../releases/download/v0.4.2/claude-counter-0.4.2.xpi).
+1. Download [`claude-counter-0.4.2.xpi`](https://github.com/she-llac/claude-counter/releases/download/v0.4.2/claude-counter-0.4.2.xpi).
 2. Drag and drop the `.xpi` file into any open Firefox window, or install it via the gear icon in `about:addons`.
 3. Approve permissions and click **Add**.
 
