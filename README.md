@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./icons/title.svg" alt="CLAUDE TOKEN COUNTER" width="600">
+  <img src="./icons/title.svg" alt="  CLAUDE TOKEN COUNTER" width="600">
 </p>
 
 <p align="center">
