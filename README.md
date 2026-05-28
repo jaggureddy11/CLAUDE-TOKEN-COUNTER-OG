@@ -87,6 +87,9 @@ graph TD
 2. Click to load the raw file: [`claude-counter.user.js`](./userscript/claude-counter.user.js).
 3. Confirm the installation in your userscript manager's dashboard.
 
+### 🖥️ Claude Desktop App
+You can also inject Claude Counter directly into the official Claude Desktop client! Check out the [Claude Desktop Guide](./DESKTOP.md) for automated patching instructions.
+
 ---
 
 ## 🔒 Privacy Guarantee
