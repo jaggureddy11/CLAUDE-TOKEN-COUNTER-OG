@@ -8,25 +8,16 @@ This guide provides both an automated patch script and manual instructions to en
 
 ## 🛠️ Method 1: Automatic Patching (Recommended)
 
-We have provided simple, automated helper scripts to easily patch your Claude Desktop application without needing to install packages manually.
+We have provided simple, automated helper scripts to easily patch your Claude Desktop application:
 
-### Step 1: Download and Extract
-1. [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER/archive/refs/heads/main.zip) and extract it to a folder on your computer.
+1. **Download & Extract:** [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER/archive/refs/heads/main.zip) and unzip it on your computer.
+2. **Run Patcher:**
+   * ** macOS:** Double-click `patch-mac.command` *(if blocked by macOS security, right-click/Control-click it and choose Open)*.
+   * **🪟 Windows:** Double-click `patch-windows.bat`.
+3. **Restart:** Close and relaunch your **Claude Desktop** application.
 
-### Step 2: Run the Patch Script
-*   ** macOS:**
-    1. Double-click the `patch-mac.command` file in the extracted folder.
-    2. If blocked by macOS security, right-click (or Control-click) `patch-mac.command` and choose **Open**, then click **Open** in the pop-up.
-    3. If Node.js is missing, it will display a link to download it. Install Node.js and run the file again.
-    4. The script will open a Terminal window, automatically install `@electron/asar`, back up and patch your files, and re-sign the application.
-*   **🪟 Windows:**
-    1. Double-click the `patch-windows.bat` file in the extracted directory.
-    2. If Node.js is missing, it will display a link to download it. Install Node.js and run `patch-windows.bat` again.
-    3. The script will open a command prompt, automatically install the required patching utility (`@electron/asar`), back up and patch your files, and output a success message.
-    4. Press any key to close the console.
-
-### Step 3: Restart Claude Desktop
-Once the patch completes successfully, close and restart your Claude Desktop application. The token counts, cache timer, and usage progress bars will now render directly inside your desktop window.
+> [!TIP]
+> **To Restore / Uninstall:** Delete the modified `app.asar` inside the resources folder and rename the backup file `app.asar.bak` back to `app.asar`.
 
 ---
 
