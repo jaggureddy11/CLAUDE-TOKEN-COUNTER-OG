@@ -8,17 +8,22 @@ This guide provides both an automated patch script and manual instructions to en
 
 ## 🛠️ Method 1: Automatic Patching (Recommended)
 
-We have provided a helper Node.js script in this repository to automate the process of backing up, unpacking, injecting the script, and repacking your Claude Desktop application.
+We have provided simple, automated helper scripts to easily patch your Claude Desktop application without needing to install packages manually.
 
-### Step 1: Run the Patch Script
-Open your terminal in the root directory of this project and run the following command:
+### Step 1: Download and Extract
+1. [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER/archive/refs/heads/main.zip) and extract it to a folder on your computer.
 
-```bash
-node scripts/patch-desktop.js
-```
+### Step 2: Run the Patch Script
+*   ** macOS:** Open terminal in the extracted directory and run:
+    ```bash
+    ./patch-mac.sh
+    ```
+    *(The script will automatically check for Node.js, install necessary builders, patch the application, and re-sign the app bundle).*
+*   **🪟 Windows:** Double-click the `patch-windows.bat` file in the extracted directory.
+    *(This opens a command prompt to verify Node.js, install dependencies, and patch your desktop files automatically).*
 
-### Step 2: Restart Claude Desktop
-Once the script outputs `Success!`, close and restart your Claude Desktop application. The token counts, cache timer, and usage progress bars will now render directly inside your desktop window.
+### Step 3: Restart Claude Desktop
+Once the patch completes successfully, close and restart your Claude Desktop application. The token counts, cache timer, and usage progress bars will now render directly inside your desktop window.
 
 ---
 

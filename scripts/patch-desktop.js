@@ -1,6 +1,31 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const cp = require('child_process');
+
+// Automatically install dependencies if they are missing
+function ensureDependencies() {
+    try {
+        require.resolve('@electron/asar');
+    } catch (e) {
+        console.log(`[+] Missing dependencies (@electron/asar). Installing automatically...`);
+        try {
+            cp.execSync('npm install --no-audit --no-fund', {
+                stdio: 'inherit',
+                cwd: path.join(__dirname, '..')
+            });
+            console.log(`[+] Dependencies installed successfully.\n`);
+        } catch (installErr) {
+            console.error(`[-] Failed to install dependencies automatically:`, installErr.message);
+            console.log(`[!] Please try running "npm install" manually in the project root.`);
+            process.exit(1);
+        }
+    }
+}
+
+// Run dependency check
+ensureDependencies();
+
 const asar = require('@electron/asar');
 
 // Define platforms
@@ -8,6 +33,46 @@ const PLATFORMS = {
     darwin: '/Applications/Claude.app/Contents/Resources/app.asar',
     win32: path.join(process.env.LOCALAPPDATA || '', 'Programs', 'claude-desktop', 'resources', 'app.asar')
 };
+
+// Check if Claude Desktop is running and warn the user
+function checkRunningProcesses() {
+    const platform = process.platform;
+    try {
+        if (platform === 'darwin') {
+            const stdout = cp.execSync('pgrep -x "Claude" || pgrep -f "Claude.app"', { encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] });
+            if (stdout.trim()) {
+                console.log(`[!] WARNING: Claude Desktop is currently running.`);
+                console.log(`[!] Please close Claude Desktop to ensure changes apply correctly and avoid file locks.\n`);
+            }
+        } else if (platform === 'win32') {
+            const stdout = cp.execSync('tasklist /FI "IMAGENAME eq Claude.exe"', { encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] });
+            if (stdout.toLowerCase().includes('claude.exe')) {
+                console.log(`[!] WARNING: Claude Desktop is currently running.`);
+                console.log(`[!] Please close Claude Desktop to ensure changes apply correctly and avoid file locks.\n`);
+            }
+        }
+    } catch (e) {
+        // Ignored: pgrep exits with 1 if process not found (which is clean/ideal)
+    }
+}
+
+// Verify write permissions to Claude resources
+function verifyWriteAccess(asarPath) {
+    try {
+        fs.accessSync(asarPath, fs.constants.W_OK);
+        fs.accessSync(path.dirname(asarPath), fs.constants.W_OK);
+    } catch (err) {
+        console.error(`[-] Error: Permission denied. Cannot write to Claude Desktop files.`);
+        if (process.platform === 'darwin') {
+            console.log(`[!] On macOS, you likely need administrator privileges to patch applications.`);
+            console.log(`[!] Please run the patch script using sudo:`);
+            console.log(`    sudo node scripts/patch-desktop.js`);
+        } else {
+            console.log(`[!] Please run this command prompt / terminal as an Administrator.`);
+        }
+        process.exit(1);
+    }
+}
 
 async function patch() {
     const platform = process.platform;
@@ -23,6 +88,10 @@ async function patch() {
         console.log(`[!] Please ensure Claude Desktop is installed.`);
         process.exit(1);
     }
+
+    // Run safety and permission checks
+    checkRunningProcesses();
+    verifyWriteAccess(asarPath);
 
     console.log(`[+] Found Claude Desktop app.asar at: ${asarPath}`);
 
@@ -127,6 +196,22 @@ try {
             console.log(`[+] Successfully updated Info.plist with new hash.`);
         } else {
             console.warn(`[!] Could not find the ASAR integrity hash block in Info.plist to update.`);
+        }
+
+        // Auto-run codesign on macOS
+        try {
+            console.log(`[+] Re-signing Claude.app bundle (this might take a few seconds)...`);
+            const appPath = '/Applications/Claude.app';
+            if (fs.existsSync(appPath)) {
+                cp.execSync(`codesign --force --deep --sign - "${appPath}"`, { stdio: 'inherit' });
+                console.log(`[+] Successfully signed Claude.app.`);
+            } else {
+                console.warn(`[!] Claude.app not found at ${appPath}, skipping automatic signing.`);
+            }
+        } catch (signErr) {
+            console.error(`[-] Failed to automatically sign Claude.app:`, signErr.message);
+            console.log(`[!] You may need to run the codesign command manually:`);
+            console.log(`    codesign --force --deep --sign - /Applications/Claude.app`);
         }
     }
 

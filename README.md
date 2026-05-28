@@ -1,8 +1,8 @@
 # 🪙 Claude Counter
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/she-llac/claude-counter?style=for-the-badge&color=2c84db&label=Release" alt="GitHub Release">
-  <img src="https://img.shields.io/github/license/she-llac/claude-counter?style=for-the-badge&color=5aa6ff&label=License" alt="License">
+  <img src="https://img.shields.io/github/v/release/jaggureddy11/CLAUDE-TOKEN-COUNTER?style=for-the-badge&color=2c84db&label=Release" alt="GitHub Release">
+  <img src="https://img.shields.io/github/license/jaggureddy11/CLAUDE-TOKEN-COUNTER?style=for-the-badge&color=5aa6ff&label=License" alt="License">
   <img src="https://img.shields.io/badge/Platform-Chrome%20%7C%20Firefox%20%7C%20Userscript%20%7C%20Desktop-orange?style=for-the-badge" alt="Platform compatibility">
   <img src="https://img.shields.io/badge/Privacy-100%25%20Local-success?style=for-the-badge" alt="Privacy policy">
 </p>
@@ -34,6 +34,10 @@
 * **SSE Interception:** Hooks directly into Claude's native Server-Sent Events (SSE) `message_limit` stream to extract precise, raw usage fractions.
 * **Session & Weekly Trackers:** Beautiful progress bars visualize your 5-hour rolling session window and 7-day weekly usage.
 * **Reset Timers:** Live countdowns show exactly when your usage quotas will renew.
+
+<p align="center">
+  <img src="./screenshot-limit.jpg" alt="Claude Counter Limit Screenshot" width="800" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+</p>
 
 ---
 
@@ -72,7 +76,7 @@ graph TD
 Choose your preferred way to run Claude Counter:
 
 ### 🌐 1. Google Chrome (Brave, Edge, Opera)
-1. Download and extract the project files to a folder on your computer.
+1. [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER/archive/refs/heads/main.zip) and extract it to a folder on your computer.
 2. Open your browser and navigate to `chrome://extensions/`.
 3. Toggle **Developer mode** on (top-right corner).
 4. Click **Load unpacked** (top-left corner) and select the project folder.
@@ -89,27 +93,21 @@ Choose your preferred way to run Claude Counter:
 
 ### 🖥️ 4. Claude Desktop Application (macOS & Windows)
 
-You can run the token counter inside the official **Claude Desktop** client by patching its local packaged files.
+You can run the token counter inside the official **Claude Desktop** client by using our automatic patching scripts.
 
-> [!IMPORTANT]
-> Modifying installed applications on macOS requires re-signing the application to satisfy system integrity protections.
+#### Step 1: Download and Extract
+1. [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER/archive/refs/heads/main.zip) and extract it to a folder on your computer.
 
-#### Step 1: Install prerequisites
-Open your terminal in the project directory and install the builder tool:
-```bash
-npm install
-```
-
-#### Step 2: Apply the patch and sign
-Run the automated patch script to inject the scripts and sign the application bundle:
+#### Step 2: Run the Patch Script
 * **macOS:**
+  Open your terminal in the extracted folder and run:
   ```bash
-  node scripts/patch-desktop.js && codesign --force --deep --sign - /Applications/Claude.app
+  ./patch-mac.sh
   ```
+  *(The script automatically verifies Node.js, installs dependencies, patches the app, and signs the bundle).*
 * **Windows:**
-  ```cmd
-  node scripts/patch-desktop.js
-  ```
+  Double-click the `patch-windows.bat` file in the extracted folder.
+  *(This launches a command prompt to verify Node.js and apply the patch automatically).*
 
 #### Step 3: Restart Claude
 Completely close and relaunch **Claude Desktop**. The token counter will now be active in the application window!
