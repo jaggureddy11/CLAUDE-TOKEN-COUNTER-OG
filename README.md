@@ -106,8 +106,10 @@ You can run the token counter inside the official **Claude Desktop** client by u
   ```
   *(The script automatically verifies Node.js, installs dependencies, patches the app, and signs the bundle).*
 * **Windows:**
-  Double-click the `patch-windows.bat` file in the extracted folder.
-  *(This launches a command prompt to verify Node.js and apply the patch automatically).*
+  1. Double-click the `patch-windows.bat` file in the extracted folder.
+  2. If Node.js is missing, it will display a link to download it. Install Node.js and run `patch-windows.bat` again.
+  3. The script will open a command prompt, automatically install the required patching utility (`@electron/asar`), back up and patch your files, and output a success message.
+  4. Press any key to close the console.
 
 #### Step 3: Restart Claude
 Completely close and relaunch **Claude Desktop**. The token counter will now be active in the application window!

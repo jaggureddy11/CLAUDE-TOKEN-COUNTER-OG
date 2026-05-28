@@ -19,8 +19,11 @@ We have provided simple, automated helper scripts to easily patch your Claude De
     ./patch-mac.sh
     ```
     *(The script will automatically check for Node.js, install necessary builders, patch the application, and re-sign the app bundle).*
-*   **🪟 Windows:** Double-click the `patch-windows.bat` file in the extracted directory.
-    *(This opens a command prompt to verify Node.js, install dependencies, and patch your desktop files automatically).*
+*   **🪟 Windows:**
+    1. Double-click the `patch-windows.bat` file in the extracted directory.
+    2. If Node.js is missing, it will display a link to download it. Install Node.js and run `patch-windows.bat` again.
+    3. The script will open a command prompt, automatically install the required patching utility (`@electron/asar`), back up and patch your files, and output a success message.
+    4. Press any key to close the console.
 
 ### Step 3: Restart Claude Desktop
 Once the patch completes successfully, close and restart your Claude Desktop application. The token counts, cache timer, and usage progress bars will now render directly inside your desktop window.
