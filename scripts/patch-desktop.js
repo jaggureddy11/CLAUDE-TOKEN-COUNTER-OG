@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const asar = require('@electron/asar');
 
 // Define platforms
@@ -43,15 +44,22 @@ async function patch() {
 
     const userscriptSource = path.join(__dirname, '..', 'userscript', 'claude-counter.user.js');
     const userscriptDest = path.join(tmpExtractDir, '.vite', 'build', 'claude-counter.user.js');
+    const tokenizerSource = path.join(__dirname, '..', 'src', 'vendor', 'o200k_base.js');
+    const tokenizerDest = path.join(tmpExtractDir, '.vite', 'build', 'o200k_base.js');
 
     if (!fs.existsSync(userscriptSource)) {
         console.error(`[-] Userscript not found at: ${userscriptSource}`);
         process.exit(1);
     }
+    if (!fs.existsSync(tokenizerSource)) {
+        console.error(`[-] Tokenizer vendor file not found at: ${tokenizerSource}`);
+        process.exit(1);
+    }
 
-    console.log(`[+] Copying userscript to build folder...`);
+    console.log(`[+] Copying userscript and tokenizer to build folder...`);
     fs.mkdirSync(path.dirname(userscriptDest), { recursive: true });
     fs.copyFileSync(userscriptSource, userscriptDest);
+    fs.copyFileSync(tokenizerSource, tokenizerDest);
 
     const entryPoint = path.join(tmpExtractDir, '.vite', 'build', 'index.pre.js');
     if (!fs.existsSync(entryPoint)) {
@@ -68,9 +76,12 @@ try {
     const fs = require('fs');
     const path = require('path');
     const electron = require('electron');
+    const tokenizerPath = path.join(__dirname, 'o200k_base.js');
     const scriptPath = path.join(__dirname, 'claude-counter.user.js');
-    if (fs.existsSync(scriptPath)) {
-        const code = fs.readFileSync(scriptPath, 'utf8');
+    if (fs.existsSync(tokenizerPath) && fs.existsSync(scriptPath)) {
+        const tokenizerCode = fs.readFileSync(tokenizerPath, 'utf8');
+        const scriptCode = fs.readFileSync(scriptPath, 'utf8');
+        const code = tokenizerCode + '\\n' + scriptCode;
         electron.app.on('web-contents-created', (event, webContents) => {
             webContents.on('did-finish-load', () => {
                 const url = webContents.getURL();
@@ -97,6 +108,27 @@ try {
 
     console.log(`[+] Repacking app.asar...`);
     await asar.createPackage(tmpExtractDir, asarPath);
+
+    // Calculate SHA256 of the new app.asar and update Info.plist on macOS
+    const plistPath = path.join(path.dirname(asarPath), '..', 'Info.plist');
+    if (fs.existsSync(plistPath)) {
+        console.log(`[+] Found Info.plist at: ${plistPath}. Updating ASAR integrity hash...`);
+        const rawHeader = asar.getRawHeader(asarPath);
+        const hashSum = crypto.createHash('sha256');
+        hashSum.update(rawHeader.headerString);
+        const newHash = hashSum.digest('hex');
+        console.log(`[+] New SHA256: ${newHash}`);
+
+        let plistContent = fs.readFileSync(plistPath, 'utf8');
+        const regex = /(<key>Resources\/app\.asar<\/key>\s*<dict>\s*<key>algorithm<\/key>\s*<string>SHA256<\/string>\s*<key>hash<\/key>\s*<string>)([a-fA-F0-9]{64})(<\/string>)/;
+        if (regex.test(plistContent)) {
+            plistContent = plistContent.replace(regex, `$1${newHash}$3`);
+            fs.writeFileSync(plistPath, plistContent, 'utf8');
+            console.log(`[+] Successfully updated Info.plist with new hash.`);
+        } else {
+            console.warn(`[!] Could not find the ASAR integrity hash block in Info.plist to update.`);
+        }
+    }
 
     console.log(`[+] Cleaning up temporary files...`);
     fs.rmSync(tmpExtractDir, { recursive: true, force: true });

@@ -1,0 +1,14 @@
+{
+  "name": "claude-counter",
+  "version": "0.4.2",
+  "description": "Shows token count, cache timer, and usage bars on claude.ai.",
+  "main": "scripts/patch-desktop.js",
+  "scripts": {
+    "patch": "node scripts/patch-desktop.js"
+  },
+  "dependencies": {
+    "@electron/asar": "^3.2.9"
+  },
+  "author": "she-llac",
+  "license": "MIT"
+}
