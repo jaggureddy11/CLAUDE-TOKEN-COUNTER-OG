@@ -1,6 +1,6 @@
 {
   "name": "claude-counter",
-  "version": "0.4.2",
+  "version": "1.1.0",
   "description": "Shows token count, cache timer, and usage bars on claude.ai.",
   "main": "scripts/patch-desktop.js",
   "scripts": {
