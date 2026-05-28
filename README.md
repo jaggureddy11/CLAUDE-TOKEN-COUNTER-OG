@@ -104,7 +104,7 @@ If you want to contribute or build locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/she-llac/claude-counter.git
+   git clone https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER
    cd claude-counter
    ```
 2. **Repository Architecture:**
