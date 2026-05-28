@@ -1,50 +1,129 @@
-# Claude Counter
+# 🪙 Claude Counter
 
-A modern and minimal browser extension that shows real-time token count, cache timer, and native usage bars on claude.ai.
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/she-llac/claude-counter?style=for-the-badge&color=2c84db&label=Release" alt="GitHub Release">
+  <img src="https://img.shields.io/github/license/she-llac/claude-counter?style=for-the-badge&color=5aa6ff&label=License" alt="License">
+  <img src="https://img.shields.io/badge/Platform-Chrome%20%7C%20Firefox%20%7C%20Userscript-orange?style=for-the-badge" alt="Platform compatibility">
+  <img src="https://img.shields.io/badge/Privacy-100%25%20Local-success?style=for-the-badge" alt="Privacy policy">
+</p>
 
-![Claude Counter screenshot](./screenshot.png)
+---
 
-## Features
+<p align="center">
+  <b>A sleek, lightweight, and modern browser utility that brings real-time token counts, cache countdowns, and exact rolling usage analytics directly into your Claude.ai interface.</b>
+</p>
 
-- **Token count** — Approximate token count for the current conversation, with a mini progress bar against the 200k context limit
-- **Cache timer** — Countdown showing how long the conversation remains cached (cheaper to continue)
-- **Usage bars** — Session (5-hour) and weekly (7-day) usage from Claude's native API, with progress bars and reset countdowns (more accurate than the rounded /usage page)
+<p align="center">
+  <img src="./screenshot.png" alt="Claude Counter Screenshot" width="800" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+</p>
 
-## Installation
+---
 
-**Chrome / Edge / Chromium**
+## ✨ Features
 
-1. Download [`claude-counter-0.4.2.zip`](../../releases/download/v0.4.2/claude-counter-0.4.2.zip)
-2. Go to `chrome://extensions` and enable **Developer mode**
-3. Drag and drop the zip onto the page
+### 🪙 Real-Time Token Counter
+- **Precise Offline Approximations:** Uses a vendored `o200k_base` tiktoken tokenizer (the native tokenizer for Claude 3 & 3.5 models) to estimate prompt size locally.
+- **Visual Context Gauge:** A sleek mini progress bar displays usage against Claude's **200,000-token** context window.
+- **Compaction Indicators:** Automatically adapts styling when Claude performs background context window compaction.
 
-**Firefox**
+### ⏱️ Cheaper-to-Continue Cache Timer
+- **Prompt Caching Support:** Anthropic caches active prompt contexts for up to **5 minutes**.
+- **Live Countdown:** Displays a countdown timer showing when the cache expires.
+- **Save up to 90%:** Message before the timer hits `0:00` to continue from the cached state, drastically reducing token consumption and costs.
 
-1. Download [`claude-counter-0.4.2.xpi`](../../releases/download/v0.4.2/claude-counter-0.4.2.xpi)
-2. Drag it into any Firefox window and click **Add**
+### 📊 Exact Rolling Usage Analytics
+- **Session & Weekly Trackers:** Visualizes your 5-hour rolling session window and 7-day weekly usage.
+- **SSE Interception:** Rather than rounded, lagging figures from Claude's `/usage` page, the tool hooks into the active Server-Sent Events (SSE) `message_limit` stream to extract and render precise, raw usage fractions.
+- **Reset Timers:** Live countdowns indicate the exact minute your usage quotas will renew.
 
-**Userscript**
+---
 
-1. Install the userscript from [`claude-counter.user.js`](./userscript/claude-counter.user.js)
+## 🛠️ How It Works
 
-## How it works
+Here is a visual flow of how Claude Counter captures, analyzes, and injects metrics locally without affecting performance:
 
-- Intercepts Claude's API responses to read conversation data and usage info
-- Uses a vendored tokenizer (`o200k_base`) for approximate token counting
-- Uses Claude’s `/usage` plus live SSE `message_limit` data; the SSE provides exact, unrounded utilization fractions, so the progress bars are more accurate than the rounded percentages shown on Claude’s native /usage page
-- Watches for DOM changes to inject UI elements as you navigate
+```mermaid
+graph TD
+    %% Colors and Styling
+    classDef browser fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#d8dee9;
+    classDef process fill:#3b4252,stroke:#81a1c1,stroke-width:1px,color:#e5e9f0;
+    classDef inject fill:#4c566a,stroke:#a3be8c,stroke-width:1.5px,color:#e5e9f0;
+    
+    User([User interacts with Claude.ai]) -->|Sends Message| API[Claude API]
+    
+    subgraph Browser_Environment ["Browser Environment (100% Local & Private)"]
+        Page[Claude Web Interface]:::browser
+        Bridge[injected/bridge.js]:::process
+        Content[content/main.js]:::process
+        Tokenizer[vendor/o200k_base.js]:::process
+        UI[Counter UI]:::inject
+    end
+    
+    Bridge -.->|Hooks window.fetch & SSE| Page
+    Bridge -->|Dispatches Events cc:conversation & cc:message_limit| Content
+    Content -->|Computes Tokens| Tokenizer
+    Content -->|Updates State| UI
+    UI -.->|Injects HTML Elements| Page
+```
 
-## Privacy
+---
 
-- All data stays local — no external servers, no tracking
-- Reads your `lastActiveOrg` cookie to query Claude's `/usage` endpoint
-- Makes requests only to `claude.ai`
+## 📦 Installation
 
-## Credits
+### 🌐 Chromium-based (Chrome, Edge, Brave, Opera)
+1. Download [`claude-counter-0.4.2.zip`](../../releases/download/v0.4.2/claude-counter-0.4.2.zip).
+2. Extract the contents to a local folder of your choice.
+3. Open your browser and navigate to `chrome://extensions`.
+4. Toggle **Developer mode** on in the top-right corner.
+5. Click **Load unpacked** in the top-left and select the extracted folder.
 
-- Token counting via [gpt-tokenizer](https://github.com/niieani/gpt-tokenizer) (MIT)
-- Inspired by [Claude Usage Tracker](https://github.com/lugia19/Claude-Usage-Extension) by lugia19
+### 🦊 Firefox
+1. Download [`claude-counter-0.4.2.xpi`](../../releases/download/v0.4.2/claude-counter-0.4.2.xpi).
+2. Drag and drop the `.xpi` file into any open Firefox window, or install it via the gear icon in `about:addons`.
+3. Approve permissions and click **Add**.
 
-## License
+### 📜 Userscript (Tampermonkey / Violentmonkey)
+1. Ensure a userscript manager browser extension is active.
+2. Click to load the raw file: [`claude-counter.user.js`](./userscript/claude-counter.user.js).
+3. Confirm the installation in your userscript manager's dashboard.
 
-MIT
+---
+
+## 🔒 Privacy Guarantee
+
+> [!NOTE]
+> **No External Traffic:** Token calculation, cookie lookups, and event interception are processed entirely locally. No external APIs, analytic endpoints, or trackers are contacted.
+> 
+> **Zero Credential Sharing:** Claude Counter uses the standard `lastActiveOrg` cookie to make authenticated calls directly to Claude's native `/usage` endpoint.
+
+---
+
+## 💻 Local Development
+
+If you want to contribute or build locally:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/she-llac/claude-counter.git
+   cd claude-counter
+   ```
+2. **Repository Architecture:**
+   - [`src/content/`](./src/content/) — Extention content scripts (UI rendering, tokenization drivers, orchestrator).
+   - [`src/injected/`](./src/injected/) — Webpage-level API interception hooks (`bridge.js`).
+   - [`src/vendor/`](./src/vendor/) — Tiktoken tokenizer library assets.
+   - [`userscript/`](./userscript/) — Bundled single-file userscript package.
+
+To test changes, load the root folder unpacked in your browser's extension developer mode, or copy updates straight into the userscript.
+
+---
+
+## 🤝 Credits
+
+- Tokenization library powered by [gpt-tokenizer](https://github.com/niieani/gpt-tokenizer) (MIT).
+- Inspired by [Claude Usage Tracker](https://github.com/lugia19/Claude-Usage-Extension) by lugia19.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE).
