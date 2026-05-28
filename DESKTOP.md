@@ -14,11 +14,11 @@ We have provided simple, automated helper scripts to easily patch your Claude De
 1. [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER/archive/refs/heads/main.zip) and extract it to a folder on your computer.
 
 ### Step 2: Run the Patch Script
-*   ** macOS:** Open terminal in the extracted directory and run:
-    ```bash
-    ./patch-mac.sh
-    ```
-    *(The script will automatically check for Node.js, install necessary builders, patch the application, and re-sign the app bundle).*
+*   ** macOS:**
+    1. Double-click the `patch-mac.command` file in the extracted folder.
+    2. If blocked by macOS security, right-click (or Control-click) `patch-mac.command` and choose **Open**, then click **Open** in the pop-up.
+    3. If Node.js is missing, it will display a link to download it. Install Node.js and run the file again.
+    4. The script will open a Terminal window, automatically install `@electron/asar`, back up and patch your files, and re-sign the application.
 *   **🪟 Windows:**
     1. Double-click the `patch-windows.bat` file in the extracted directory.
     2. If Node.js is missing, it will display a link to download it. Install Node.js and run `patch-windows.bat` again.

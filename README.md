@@ -100,11 +100,10 @@ You can run the token counter inside the official **Claude Desktop** client by u
 
 #### Step 2: Run the Patch Script
 * **macOS:**
-  Open your terminal in the extracted folder and run:
-  ```bash
-  ./patch-mac.sh
-  ```
-  *(The script automatically verifies Node.js, installs dependencies, patches the app, and signs the bundle).*
+  1. Double-click the `patch-mac.command` file in the extracted folder.
+  2. If blocked by macOS security, right-click (or Control-click) `patch-mac.command` and choose **Open**, then click **Open** in the pop-up.
+  3. If Node.js is missing, it will display a link to download it. Install Node.js and run the file again.
+  4. The script will open a Terminal window, automatically install `@electron/asar`, back up and patch your files, and re-sign the application.
 * **Windows:**
   1. Double-click the `patch-windows.bat` file in the extracted folder.
   2. If Node.js is missing, it will display a link to download it. Install Node.js and run `patch-windows.bat` again.
