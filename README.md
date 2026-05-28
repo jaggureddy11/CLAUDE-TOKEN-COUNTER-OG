@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/github/package-json/v/jaggureddy11/CLAUDE-TOKEN-COUNTER?style=for-the-badge&color=2c84db&label=Version" alt="Release Version">
   <img src="https://img.shields.io/github/license/jaggureddy11/CLAUDE-TOKEN-COUNTER?style=for-the-badge&color=5aa6ff&label=License" alt="License">
-  <img src="https://img.shields.io/badge/Platform-Chrome%20%7C%20Firefox%20%7C%20Userscript%20%7C%20Desktop-orange?style=for-the-badge" alt="Platform compatibility">
+  <img src="https://img.shields.io/badge/Platform-Chrome%20%7C%20Desktop-orange?style=for-the-badge" alt="Platform compatibility">
   <img src="https://img.shields.io/badge/Privacy-100%25%20Local-success?style=for-the-badge" alt="Privacy policy">
 </p>
 
