@@ -81,14 +81,6 @@ Choose your preferred way to run Claude Counter:
 3. Toggle **Developer mode** on (top-right corner).
 4. Click **Load unpacked** (top-left corner) and select the project folder.
 
-### 🦊 2. Firefox
-1. Download the release `.xpi` file.
-2. Drag and drop the `.xpi` file into any open Firefox tab, or go to `about:addons` and select **Install Add-on From File...** under the gear icon.
-
-### 📜 3. Userscript (Tampermonkey / Violentmonkey)
-1. Ensure you have a userscript manager extension active in your browser.
-2. Click to install: [`claude-counter.user.js`](./userscript/claude-counter.user.js).
-
 ---
 
 ### 🖥️ 4. Claude Desktop Application (macOS & Windows)
