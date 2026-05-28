@@ -1,4 +1,4 @@
-# 🪙 Claude Counter
+# CLAUDE TOKEN COUNTER
 
 <p align="center">
   <img src="https://img.shields.io/github/v/release/jaggureddy11/CLAUDE-TOKEN-COUNTER?style=for-the-badge&color=2c84db&label=Release" alt="GitHub Release">
