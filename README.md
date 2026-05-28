@@ -1,6 +1,6 @@
 # Claude Counter
 
-A minimal browser extension that shows token count, cache timer, and usage bars on claude.ai.
+A modern and minimal browser extension that shows real-time token count, cache timer, and native usage bars on claude.ai.
 
 ![Claude Counter screenshot](./screenshot.png)
 
