@@ -90,7 +90,7 @@ Choose your preferred way to run Claude Counter:
 You can run the token counter inside the official **Claude Desktop** client using our automated scripts.
 
 1. **Download & Extract:** [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER/archive/refs/heads/main.zip) and unzip it on your computer.
-2. **Run Patcher:**
+2. **Run Patcher:** *(Requires [Node.js](https://nodejs.org/) installed)*
    * **macOS:** Double-click `patch-mac.command` *(if blocked by macOS security, right-click/Control-click it and choose Open)*.
    * **Windows:** Double-click `patch-windows.bat`.
 3. **Restart:** Completely close and relaunch **Claude Desktop**.
