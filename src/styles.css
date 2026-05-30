@@ -87,8 +87,8 @@ html[data-mode="dark"] .cc-bar,
 	border-radius: calc(var(--cc-radius) - 1.5px);
 }
 
-.cc-bar__fill.cc-warn {
-	background: var(--cc-fill-warn);
+.cc-bar__fill.cc-full {
+	background: var(--cc-fill-warn) !important;
 }
 
 .cc-bar__marker {

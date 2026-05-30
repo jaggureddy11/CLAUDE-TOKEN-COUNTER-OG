@@ -469,16 +469,18 @@
 				this.sessionResetMs = session.resets_at ? Date.parse(session.resets_at) : null;
 				this.sessionWindowStartMs = this.sessionResetMs ? this.sessionResetMs - 5 * 60 * 60 * 1000 : null;
 				const resetText = this.sessionResetMs ? ` · resets in ${formatResetCountdown(this.sessionResetMs)}` : '';
-				this.sessionUsageSpan.textContent = `Session: ${pct}%${resetText}`;
+				
+				const isSessionFull = rawPct >= 100;
+				const emojiText = isSessionFull ? ' 👀' : '';
+				this.sessionUsageSpan.textContent = `Session: ${pct}%${resetText}${emojiText}`;
 
 				const width = Math.max(0, Math.min(100, rawPct));
 				this.sessionBarFill.style.width = `${width}%`;
-				this.sessionBarFill.classList.toggle('cc-warn', width >= 90);
-				this.sessionBarFill.classList.toggle('cc-full', width >= 99.5);
+				this.sessionBarFill.classList.toggle('cc-full', isSessionFull);
 			} else {
 				this.sessionUsageSpan.textContent = '';
 				this.sessionBarFill.style.width = '0%';
-				this.sessionBarFill.classList.remove('cc-warn', 'cc-full');
+				this.sessionBarFill.classList.remove('cc-full');
 				this.sessionResetMs = null;
 				this.sessionWindowStartMs = null;
 			}
@@ -496,18 +498,20 @@
 				this.weeklyResetMs = weekly.resets_at ? Date.parse(weekly.resets_at) : null;
 				this.weeklyWindowStartMs = this.weeklyResetMs ? this.weeklyResetMs - 7 * 24 * 60 * 60 * 1000 : null;
 				const resetText = this.weeklyResetMs ? ` · resets in ${formatResetCountdown(this.weeklyResetMs)}` : '';
-				this.weeklyUsageSpan.textContent = `Weekly: ${pct}%${resetText}`;
+				
+				const isWeeklyFull = rawPct >= 100;
+				const emojiText = isWeeklyFull ? ' 👀' : '';
+				this.weeklyUsageSpan.textContent = `Weekly: ${pct}%${resetText}${emojiText}`;
 
 				const width = Math.max(0, Math.min(100, rawPct));
 				this.weeklyBarFill.style.width = `${width}%`;
-				this.weeklyBarFill.classList.toggle('cc-warn', width >= 90);
-				this.weeklyBarFill.classList.toggle('cc-full', width >= 99.5);
+				this.weeklyBarFill.classList.toggle('cc-full', isWeeklyFull);
 			} else {
 				this.weeklyUsageSpan.classList.add('cc-hidden');
 				this.weeklyBar.classList.add('cc-hidden');
 				this.weeklyResetMs = null;
 				this.weeklyWindowStartMs = null;
-				this.weeklyBarFill.classList.remove('cc-warn', 'cc-full');
+				this.weeklyBarFill.classList.remove('cc-full');
 			}
 
 			this._updateMarkers();
@@ -560,7 +564,9 @@
 				const idx = this.sessionUsageSpan.textContent.indexOf('· resets in');
 				if (idx !== -1) {
 					const prefix = this.sessionUsageSpan.textContent.slice(0, idx + '· resets in '.length);
-					this.sessionUsageSpan.textContent = `${prefix}${formatResetCountdown(this.sessionResetMs)}`;
+					const isFull = this.sessionBarFill?.classList.contains('cc-full');
+					const emojiText = isFull ? ' 👀' : '';
+					this.sessionUsageSpan.textContent = `${prefix}${formatResetCountdown(this.sessionResetMs)}${emojiText}`;
 				}
 			}
 
@@ -568,7 +574,9 @@
 				const idx = this.weeklyUsageSpan.textContent.indexOf('· resets in');
 				if (idx !== -1) {
 					const prefix = this.weeklyUsageSpan.textContent.slice(0, idx + '· resets in '.length);
-					this.weeklyUsageSpan.textContent = `${prefix}${formatResetCountdown(this.weeklyResetMs)}`;
+					const isFull = this.weeklyBarFill?.classList.contains('cc-full');
+					const emojiText = isFull ? ' 👀' : '';
+					this.weeklyUsageSpan.textContent = `${prefix}${formatResetCountdown(this.weeklyResetMs)}${emojiText}`;
 				}
 			}
 
