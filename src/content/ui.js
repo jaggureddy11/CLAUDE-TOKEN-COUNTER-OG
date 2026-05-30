@@ -130,9 +130,10 @@
 
 		getProgressChrome() {
 			const root = document.documentElement;
-			const modeDark = root.dataset?.mode === 'dark';
-			const modeLight = root.dataset?.mode === 'light';
-			const isDark = modeDark && !modeLight;
+			const isDark = root.classList.contains('dark') || 
+			               document.body.classList.contains('dark') || 
+			               root.dataset?.mode === 'dark' || 
+			               window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 			return {
 				strokeColor: isDark ? CC.COLORS.PROGRESS_OUTLINE_DARK : CC.COLORS.PROGRESS_OUTLINE_LIGHT,
