@@ -12,7 +12,17 @@ We have provided simple, automated helper scripts to easily patch your Claude De
 
 1. **Download & Extract:** [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER-OG/archive/refs/heads/main.zip) and unzip it on your computer.
 2. **Run Patcher:** *(Requires [Node.js](https://nodejs.org/) installed)*
-   * ** macOS:** Double-click `patch-mac.command` *(if blocked by macOS security, right-click/Control-click it and choose Open)*.
+   * ** macOS:** Double-click `patch-mac.command`.
+     > [!IMPORTANT]
+     > **macOS Security Block:** If macOS blocks double-click execution (warning you that Apple cannot verify the developer), you can bypass it with either of these simple options:
+     > - **Terminal Method (Recommended):** Open Terminal, navigate to this project directory, and run:
+     >   ```bash
+     >   node scripts/patch-desktop.js
+     >   ```
+     > - **Unblock Double-Click:** Run this in Terminal in the project directory to clear the macOS quarantine attribute:
+     >   ```bash
+     >   xattr -d com.apple.quarantine patch-mac.command
+     >   ```
    * **🪟 Windows:** Double-click `patch-windows.bat`.
 3. **Restart:** Close and relaunch your **Claude Desktop** application.
 
