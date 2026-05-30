@@ -55,28 +55,27 @@ html[data-mode="dark"] .cc-usageRow {
 
 /* Bars (mini + usage) */
 .cc-bar {
-	--cc-radius: 4px;
-	--cc-stroke: rgba(0, 0, 0, 0.2);
+	--cc-radius: 2px;
 	--cc-fill: currentColor;
 	--cc-fill-warn: #e05f5f;
 	--cc-marker: currentColor;
-	--cc-bg: rgba(0, 0, 0, 0.05);
+	--cc-bg: rgba(0, 0, 0, 0.06);
 
 	position: relative;
 	box-sizing: border-box;
 	width: 100%;
-	height: 8px;
+	height: 6px;
 	border-radius: var(--cc-radius);
-	border: 1px solid var(--cc-stroke);
 	background: var(--cc-bg);
-	padding: 1px;
+	border: none;
+	padding: 0;
 	overflow: visible;
 	user-select: none;
 }
 
 html[data-mode="dark"] .cc-bar,
 .dark .cc-bar {
-	--cc-bg: rgba(255, 255, 255, 0.05);
+	--cc-bg: rgba(255, 255, 255, 0.1);
 }
 
 .cc-bar__fill {
@@ -84,7 +83,7 @@ html[data-mode="dark"] .cc-bar,
 	height: 100%;
 	background: var(--cc-fill);
 	transition: width 300ms ease, background-color 300ms ease;
-	border-radius: calc(var(--cc-radius) - 1.5px);
+	border-radius: var(--cc-radius);
 }
 
 .cc-bar__fill.cc-full {
@@ -95,10 +94,10 @@ html[data-mode="dark"] .cc-bar,
 	position: absolute;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 1.5px;
-	height: 12px;
+	width: 2px;
+	height: 10px;
 	background: var(--cc-marker);
-	border-radius: 0.5px;
+	border-radius: 1px;
 	opacity: 0.8;
 	pointer-events: none;
 }
@@ -106,7 +105,7 @@ html[data-mode="dark"] .cc-bar,
 .cc-bar--mini {
 	width: 60px;
 	height: 3px;
-	--cc-radius: 1.5px;
+	--cc-radius: 1px;
 	border: none;
 	padding: 0;
 	background: rgba(0, 0, 0, 0.08);
@@ -118,7 +117,7 @@ html[data-mode="dark"] .cc-bar--mini,
 }
 
 .cc-bar--usage {
-	height: 8px;
+	height: 6px;
 	flex: 1;
 }
 
