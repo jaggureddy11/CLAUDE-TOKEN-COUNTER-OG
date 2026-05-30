@@ -118,7 +118,6 @@ html[data-mode="dark"] .cc-bar--mini,
 
 .cc-bar--usage {
 	height: 6px;
-	flex: 1;
 }
 
 /* Tooltips */
