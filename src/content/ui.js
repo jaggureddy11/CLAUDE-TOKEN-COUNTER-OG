@@ -160,11 +160,11 @@
 
 			if (this.sessionBarFill) {
 				const isFull = this.sessionBarFill.classList.contains('cc-full');
-				this.sessionBarFill.style.backgroundColor = isFull ? CC.COLORS.RED_WARNING : fillColor;
+				this.sessionBarFill.style.background = isFull ? CC.COLORS.RED_WARNING : fillColor;
 			}
 			if (this.weeklyBarFill) {
 				const isFull = this.weeklyBarFill.classList.contains('cc-full');
-				this.weeklyBarFill.style.backgroundColor = isFull ? CC.COLORS.RED_WARNING : fillColor;
+				this.weeklyBarFill.style.background = isFull ? CC.COLORS.RED_WARNING : fillColor;
 			}
 		}
 
@@ -487,12 +487,12 @@
 
 				const width = Math.max(0, Math.min(100, rawPct));
 				this.sessionBarFill.style.width = `${width}%`;
-				this.sessionBarFill.style.backgroundColor = isSessionFull ? CC.COLORS.RED_WARNING : fillColor;
+				this.sessionBarFill.style.background = isSessionFull ? CC.COLORS.RED_WARNING : fillColor;
 				this.sessionBarFill.classList.toggle('cc-full', isSessionFull);
 			} else {
 				this.sessionUsageSpan.textContent = '';
 				this.sessionBarFill.style.width = '0%';
-				this.sessionBarFill.style.backgroundColor = '';
+				this.sessionBarFill.style.background = '';
 				this.sessionBarFill.classList.remove('cc-full');
 				this.sessionResetMs = null;
 				this.sessionWindowStartMs = null;
@@ -518,14 +518,14 @@
 
 				const width = Math.max(0, Math.min(100, rawPct));
 				this.weeklyBarFill.style.width = `${width}%`;
-				this.weeklyBarFill.style.backgroundColor = isWeeklyFull ? CC.COLORS.RED_WARNING : fillColor;
+				this.weeklyBarFill.style.background = isWeeklyFull ? CC.COLORS.RED_WARNING : fillColor;
 				this.weeklyBarFill.classList.toggle('cc-full', isWeeklyFull);
 			} else {
 				this.weeklyUsageSpan.classList.add('cc-hidden');
 				this.weeklyBar.classList.add('cc-hidden');
 				this.weeklyResetMs = null;
 				this.weeklyWindowStartMs = null;
-				this.weeklyBarFill.style.backgroundColor = '';
+				this.weeklyBarFill.style.background = '';
 				this.weeklyBarFill.classList.remove('cc-full');
 			}
 
