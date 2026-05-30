@@ -227,7 +227,7 @@
 			this.sessionUsageSpan.className = 'cc-usageText';
 
 			this.sessionBar = document.createElement('div');
-			this.sessionBar.className = 'cc-bar cc-bar--usage';
+			this.sessionBar.className = 'cc-bar cc-bar--usage cc-bar--session';
 			this.sessionBarFill = document.createElement('div');
 			this.sessionBarFill.className = 'cc-bar__fill';
 			this.sessionMarker = document.createElement('div');
@@ -240,7 +240,7 @@
 			this.weeklyUsageSpan.className = 'cc-usageText';
 
 			this.weeklyBar = document.createElement('div');
-			this.weeklyBar.className = 'cc-bar cc-bar--usage';
+			this.weeklyBar.className = 'cc-bar cc-bar--usage cc-bar--weekly';
 			this.weeklyBarFill = document.createElement('div');
 			this.weeklyBarFill.className = 'cc-bar__fill';
 			this.weeklyMarker = document.createElement('div');
@@ -396,7 +396,7 @@
 			} else {
 				this.lengthDisplay.style.opacity = '';
 				const bar = document.createElement('div');
-				bar.className = 'cc-bar cc-bar--mini';
+				bar.className = 'cc-bar cc-bar--mini cc-bar--tokens';
 				this.lengthBar = bar;
 				const fill = document.createElement('div');
 				fill.className = 'cc-bar__fill';
