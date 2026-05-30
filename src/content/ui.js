@@ -221,13 +221,13 @@
 		_initUsageLine() {
 			this.usageLine = document.createElement('div');
 			this.usageLine.className =
-				'text-text-400 text-[11px] cc-usageRow cc-hidden flex flex-row items-center gap-3 w-full';
+				'text-text-400 text-[11px] cc-usageRow cc-hidden flex flex-row items-stretch gap-6 w-full';
 
 			this.sessionUsageSpan = document.createElement('span');
 			this.sessionUsageSpan.className = 'cc-usageText';
 
 			this.sessionBar = document.createElement('div');
-			this.sessionBar.className = 'cc-bar cc-bar--usage cc-bar--session';
+			this.sessionBar.className = 'cc-bar cc-bar--usage';
 			this.sessionBarFill = document.createElement('div');
 			this.sessionBarFill.className = 'cc-bar__fill';
 			this.sessionMarker = document.createElement('div');
@@ -240,7 +240,7 @@
 			this.weeklyUsageSpan.className = 'cc-usageText';
 
 			this.weeklyBar = document.createElement('div');
-			this.weeklyBar.className = 'cc-bar cc-bar--usage cc-bar--weekly';
+			this.weeklyBar.className = 'cc-bar cc-bar--usage';
 			this.weeklyBarFill = document.createElement('div');
 			this.weeklyBarFill.className = 'cc-bar__fill';
 			this.weeklyMarker = document.createElement('div');
@@ -256,8 +256,8 @@
 
 			this.weeklyGroup = document.createElement('div');
 			this.weeklyGroup.className = 'cc-usageGroup cc-usageGroup--weekly';
-			this.weeklyGroup.appendChild(this.weeklyBar);
 			this.weeklyGroup.appendChild(this.weeklyUsageSpan);
+			this.weeklyGroup.appendChild(this.weeklyBar);
 
 			this.usageLine.appendChild(this.sessionGroup);
 			this.usageLine.appendChild(this.weeklyGroup);
@@ -396,7 +396,7 @@
 			} else {
 				this.lengthDisplay.style.opacity = '';
 				const bar = document.createElement('div');
-				bar.className = 'cc-bar cc-bar--mini cc-bar--tokens';
+				bar.className = 'cc-bar cc-bar--mini';
 				this.lengthBar = bar;
 				const fill = document.createElement('div');
 				fill.className = 'cc-bar__fill';

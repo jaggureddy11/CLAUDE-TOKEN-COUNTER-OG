@@ -159,13 +159,13 @@
 	});
 
 	CC.COLORS = Object.freeze({
-		PROGRESS_FILL_DARK: '#2c84db',
-		PROGRESS_FILL_LIGHT: '#5aa6ff',
-		PROGRESS_OUTLINE_DARK: '#787877',
-		PROGRESS_OUTLINE_LIGHT: '#bfbfbf',
-		PROGRESS_MARKER_DARK: '#ffffff',
-		PROGRESS_MARKER_LIGHT: '#111111',
-		RED_WARNING: '#ce2029',
+		PROGRESS_FILL_DARK: '#faf9f5',
+		PROGRESS_FILL_LIGHT: '#191919',
+		PROGRESS_OUTLINE_DARK: 'transparent',
+		PROGRESS_OUTLINE_LIGHT: 'transparent',
+		PROGRESS_MARKER_DARK: '#faf9f5',
+		PROGRESS_MARKER_LIGHT: '#191919',
+		RED_WARNING: '#e26a6a',
 		BOLD_LIGHT: '#141413',
 		BOLD_DARK: '#faf9f5'
 	});
@@ -610,13 +610,13 @@
 		_initUsageLine() {
 			this.usageLine = document.createElement('div');
 			this.usageLine.className =
-				'text-text-400 text-[11px] cc-usageRow cc-hidden flex flex-row items-center gap-3 w-full';
+				'text-text-400 text-[11px] cc-usageRow cc-hidden flex flex-row items-stretch gap-6 w-full';
 
 			this.sessionUsageSpan = document.createElement('span');
 			this.sessionUsageSpan.className = 'cc-usageText';
 
 			this.sessionBar = document.createElement('div');
-			this.sessionBar.className = 'cc-bar cc-bar--usage cc-bar--session';
+			this.sessionBar.className = 'cc-bar cc-bar--usage';
 			this.sessionBarFill = document.createElement('div');
 			this.sessionBarFill.className = 'cc-bar__fill';
 			this.sessionMarker = document.createElement('div');
@@ -629,7 +629,7 @@
 			this.weeklyUsageSpan.className = 'cc-usageText';
 
 			this.weeklyBar = document.createElement('div');
-			this.weeklyBar.className = 'cc-bar cc-bar--usage cc-bar--weekly';
+			this.weeklyBar.className = 'cc-bar cc-bar--usage';
 			this.weeklyBarFill = document.createElement('div');
 			this.weeklyBarFill.className = 'cc-bar__fill';
 			this.weeklyMarker = document.createElement('div');
@@ -645,8 +645,8 @@
 
 			this.weeklyGroup = document.createElement('div');
 			this.weeklyGroup.className = 'cc-usageGroup cc-usageGroup--weekly';
-			this.weeklyGroup.appendChild(this.weeklyBar);
 			this.weeklyGroup.appendChild(this.weeklyUsageSpan);
+			this.weeklyGroup.appendChild(this.weeklyBar);
 
 			this.usageLine.appendChild(this.sessionGroup);
 			this.usageLine.appendChild(this.weeklyGroup);
@@ -785,7 +785,7 @@
 			} else {
 				this.lengthDisplay.style.opacity = '';
 				const bar = document.createElement('div');
-				bar.className = 'cc-bar cc-bar--mini cc-bar--tokens';
+				bar.className = 'cc-bar cc-bar--mini';
 				this.lengthBar = bar;
 				const fill = document.createElement('div');
 				fill.className = 'cc-bar__fill';
@@ -978,7 +978,7 @@
 	CC.__ccUserscriptStarted = true;
 
 	const STYLE_ID = 'cc-userscript-styles';
-	const STYLES = '/* Header: tokens + cache timer */\n.cc-header {\n\tmargin-top: 2px;\n\tuser-select: none;\n}\n\n.cc-headerItem {\n\twhite-space: nowrap;\n}\n\n/* Usage row: session + weekly */\n.cc-usageRow {\n\tposition: relative;\n\tz-index: 50;\n\tcursor: pointer;\n\tuser-select: none;\n\ttransition: opacity 150ms ease;\n}\n\n.cc-usageRow--dim {\n\topacity: 0.6;\n}\n\n.cc-usageGroup {\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 8px;\n\tflex: 1;\n\tmin-width: 0;\n}\n\n.cc-usageGroup--single {\n\twidth: 100%;\n}\n\n.cc-usageGroup--weekly {\n\tjustify-content: flex-end;\n}\n\n.cc-usageText {\n\twhite-space: nowrap;\n\tfont-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;\n\tfont-size: 10px;\n\tfont-weight: 600;\n\tletter-spacing: 0.03em;\n\ttext-transform: uppercase;\n\tcolor: rgba(255, 255, 255, 0.6);\n\ttransition: color 200ms ease;\n}\n\nhtml[data-mode="light"] .cc-usageText {\n\tcolor: rgba(0, 0, 0, 0.6);\n}\n\n.cc-usageRow:hover .cc-usageText {\n\tcolor: rgba(255, 255, 255, 0.85);\n}\n\nhtml[data-mode="light"] .cc-usageRow:hover .cc-usageText {\n\tcolor: rgba(0, 0, 0, 0.85);\n}\n\n/* Bars (mini + usage) */\n.cc-bar {\n\t--cc-radius: 6px;\n\tposition: relative;\n\tbox-sizing: border-box;\n\twidth: 100%;\n\theight: 8px;\n\tborder-radius: var(--cc-radius);\n\toverflow: visible;\n\tuser-select: none;\n\tbackground: rgba(255, 255, 255, 0.05);\n\tborder: 1px solid rgba(255, 255, 255, 0.08);\n\tbox-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);\n\ttransition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n\nhtml[data-mode="light"] .cc-bar {\n\tbackground: rgba(0, 0, 0, 0.06);\n\tborder: 1px solid rgba(0, 0, 0, 0.08);\n\tbox-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);\n}\n\n.cc-bar:hover {\n\tborder-color: rgba(255, 255, 255, 0.2);\n\tbackground: rgba(255, 255, 255, 0.08);\n\tbox-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 8px rgba(139, 92, 246, 0.15);\n}\n\nhtml[data-mode="light"] .cc-bar:hover {\n\tborder-color: rgba(0, 0, 0, 0.15);\n\tbackground: rgba(0, 0, 0, 0.08);\n\tbox-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 6px rgba(99, 102, 241, 0.1);\n}\n\n.cc-bar__fill {\n\twidth: 0%;\n\theight: 100%;\n\ttransition: width 400ms cubic-bezier(0.4, 0, 0.2, 1), background-image 300ms ease;\n\tborder-radius: var(--cc-radius);\n\tposition: relative;\n\toverflow: hidden;\n}\n\n.cc-bar__fill::after {\n\tcontent: \'\';\n\tposition: absolute;\n\ttop: 0; left: 0; right: 0; bottom: 0;\n\tbackground-image: repeating-linear-gradient(\n\t\t-45deg,\n\t\trgba(255, 255, 255, 0.12) 0px,\n\t\trgba(255, 255, 255, 0.12) 4px,\n\t\ttransparent 4px,\n\t\ttransparent 8px\n\t);\n\tbackground-size: 30px 30px;\n\tanimation: cc-shimmer 2s linear infinite;\n\tpointer-events: none;\n}\n\n@keyframes cc-shimmer {\n\t0% { background-position: 0 0; }\n\t100% { background-position: 30px 0; }\n}\n\n/* Gradients for different bars */\n.cc-bar--session .cc-bar__fill {\n\tbackground-image: linear-gradient(90deg, #6366f1, #8b5cf6);\n\tbox-shadow: 0 0 10px rgba(139, 92, 246, 0.45);\n}\nhtml[data-mode="light"] .cc-bar--session .cc-bar__fill {\n\tbackground-image: linear-gradient(90deg, #4f46e5, #7c3aed);\n\tbox-shadow: 0 0 6px rgba(124, 58, 237, 0.3);\n}\n\n.cc-bar--weekly .cc-bar__fill {\n\tbackground-image: linear-gradient(90deg, #ec4899, #f43f5e);\n\tbox-shadow: 0 0 10px rgba(236, 72, 153, 0.45);\n}\nhtml[data-mode="light"] .cc-bar--weekly .cc-bar__fill {\n\tbackground-image: linear-gradient(90deg, #db2777, #e11d48);\n\tbox-shadow: 0 0 6px rgba(219, 39, 119, 0.3);\n}\n\n.cc-bar--tokens .cc-bar__fill {\n\tbackground-image: linear-gradient(90deg, #06b6d4, #14b8a6);\n\tbox-shadow: 0 0 8px rgba(6, 182, 212, 0.3);\n}\nhtml[data-mode="light"] .cc-bar--tokens .cc-bar__fill {\n\tbackground-image: linear-gradient(90deg, #0891b2, #0d9488);\n\tbox-shadow: 0 0 5px rgba(8, 145, 178, 0.2);\n}\n\n.cc-bar__fill.cc-warn {\n\tbackground-image: linear-gradient(90deg, #f59e0b, #ef4444) !important;\n\tbox-shadow: 0 0 10px rgba(239, 68, 68, 0.4) !important;\n}\nhtml[data-mode="light"] .cc-bar__fill.cc-warn {\n\tbackground-image: linear-gradient(90deg, #d97706, #dc2626) !important;\n\tbox-shadow: 0 0 6px rgba(220, 38, 38, 0.3) !important;\n}\n\n.cc-bar__fill.cc-full {\n\tbackground-image: linear-gradient(90deg, #ef4444, #b91c1c) !important;\n\tbox-shadow: 0 0 12px rgba(239, 68, 68, 0.5) !important;\n}\n\n.cc-bar__marker {\n\tposition: absolute;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\twidth: 12px;\n\theight: 12px;\n\tborder-radius: 50%;\n\tbackground: #ffffff;\n\tborder: 2px solid #8b5cf6;\n\tbox-shadow: 0 0 8px rgba(139, 92, 246, 0.8), 0 2px 4px rgba(0, 0, 0, 0.2);\n\tz-index: 10;\n\tpointer-events: none;\n\ttransition: left 300ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n\nhtml[data-mode="light"] .cc-bar__marker {\n\tbackground: #ffffff;\n\tborder: 2px solid #4f46e5;\n\tbox-shadow: 0 0 6px rgba(79, 70, 229, 0.6), 0 1px 3px rgba(0, 0, 0, 0.15);\n}\n\n.cc-bar__marker::before {\n\tcontent: \'\';\n\tposition: absolute;\n\ttop: -4px; left: -4px; right: -4px; bottom: -4px;\n\tborder-radius: 50%;\n\tbackground: rgba(139, 92, 246, 0.25);\n\tanimation: cc-marker-ping 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;\n}\n\nhtml[data-mode="light"] .cc-bar__marker::before {\n\tbackground: rgba(79, 70, 229, 0.2);\n}\n\n@keyframes cc-marker-ping {\n\t0%, 100% { transform: scale(1); opacity: 1; }\n\t50% { transform: scale(1.6); opacity: 0; }\n}\n\n.cc-bar--mini {\n\twidth: 60px;\n\theight: 6px;\n\t--cc-radius: 3px;\n}\n.cc-bar--mini .cc-bar__marker {\n\tdisplay: none;\n}\n\n.cc-bar--usage {\n\theight: 8px;\n\tflex: 1;\n}\n\n/* Tooltips */\n.cc-tooltip {\n\tposition: fixed;\n\tz-index: 9999;\n\tpadding: 4px 8px;\n\tborder-radius: 4px;\n\tfont-size: 12px;\n\twhite-space: pre-line;\n\tuser-select: none;\n\tpointer-events: none;\n\topacity: 0;\n\ttransition: opacity 200ms ease;\n}\n\n.cc-tooltipTrigger {\n\t-webkit-touch-callout: none;\n\t-webkit-user-select: none;\n\tuser-select: none;\n\tcursor: help;\n}\n\n/* Hide optional elements completely (no layout space) */\n.cc-hidden {\n\tdisplay: none !important;\n}\n';
+	const STYLES = '/* Header: tokens + cache timer */\n.cc-header {\n\tmargin-top: 2px;\n\tuser-select: none;\n}\n\n.cc-headerItem {\n\twhite-space: nowrap;\n}\n\n/* Usage row: session + weekly */\n.cc-usageRow {\n\tposition: relative;\n\tz-index: 50;\n\tcursor: pointer;\n\tuser-select: none;\n\ttransition: opacity 150ms ease;\n\tmargin-top: 10px;\n\tpadding-top: 10px;\n\tborder-top: 1px solid rgba(0, 0, 0, 0.06);\n}\n\nhtml[data-mode="dark"] .cc-usageRow {\n\tborder-top: 1px solid rgba(255, 255, 255, 0.06);\n}\n\n.cc-usageRow--dim {\n\topacity: 0.6;\n}\n\n.cc-usageGroup {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tgap: 4px;\n\tflex: 1;\n\tmin-width: 0;\n}\n\n.cc-usageGroup--single {\n\twidth: 100%;\n}\n\n.cc-usageGroup--weekly {\n\talign-items: stretch;\n}\n\n.cc-usageGroup--weekly .cc-usageText {\n\ttext-align: right;\n}\n\n.cc-usageText {\n\twhite-space: nowrap;\n}\n\n/* Bars (mini + usage) */\n.cc-bar {\n\t--cc-radius: 2px;\n\t--cc-fill: currentColor;\n\t--cc-fill-warn: #e05f5f;\n\t--cc-marker: currentColor;\n\t--cc-bg: rgba(0, 0, 0, 0.08);\n\n\tposition: relative;\n\tbox-sizing: border-box;\n\twidth: 100%;\n\theight: 3px;\n\tborder-radius: var(--cc-radius);\n\tbackground: var(--cc-bg);\n\tborder: none;\n\toverflow: visible;\n\tuser-select: none;\n}\n\nhtml[data-mode="dark"] .cc-bar {\n\t--cc-bg: rgba(255, 255, 255, 0.08);\n}\n\n.cc-bar__fill {\n\twidth: 0%;\n\theight: 100%;\n\tbackground: var(--cc-fill);\n\ttransition: width 300ms ease, background-color 300ms ease;\n\tborder-radius: var(--cc-radius);\n}\n\n.cc-bar__fill.cc-warn {\n\tbackground: var(--cc-fill-warn);\n}\n\n.cc-bar__marker {\n\tposition: absolute;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\twidth: 2px;\n\theight: 7px;\n\tbackground: var(--cc-marker);\n\tborder-radius: 1px;\n\topacity: 0.8;\n\tpointer-events: none;\n}\n\n.cc-bar--mini {\n\twidth: 60px;\n\theight: 3px;\n\t--cc-radius: 1.5px;\n}\n\n.cc-bar--usage {\n\theight: 3px;\n\tflex: 1;\n}\n\n/* Tooltips */\n.cc-tooltip {\n\tposition: fixed;\n\tz-index: 9999;\n\tpadding: 4px 8px;\n\tborder-radius: 4px;\n\tfont-size: 12px;\n\twhite-space: pre-line;\n\tuser-select: none;\n\tpointer-events: none;\n\topacity: 0;\n\ttransition: opacity 200ms ease;\n}\n\n.cc-tooltipTrigger {\n\t-webkit-touch-callout: none;\n\t-webkit-user-select: none;\n\tuser-select: none;\n\tcursor: help;\n}\n\n/* Hide optional elements completely (no layout space) */\n.cc-hidden {\n\tdisplay: none !important;\n}\n';
 
 	function injectStyles() {
 		if (document.getElementById(STYLE_ID)) return;
