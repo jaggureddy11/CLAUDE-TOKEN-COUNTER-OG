@@ -1,8 +1,12 @@
-# 🖥️ Claude Counter for Claude Desktop
+# 🖥️ Claude Desktop Token Counter Setup Guide
 
-Since the official Claude Desktop application is built on Electron, it runs a Chromium web view loaded with `https://claude.ai`. This means we can patch the application's packaged assets (`app.asar`) to inject the Claude Counter userscript directly into the desktop app context.
+Track your **Claude token count on the Claude Desktop app** using this guide! Since the official Claude Desktop application is built on Electron, it runs a Chromium web view loaded with `https://claude.ai`. This means we can patch the application's packaged assets (`app.asar`) to inject the **Claude Counter** (sometimes referred to as the Claude Desktop token counter or desktop tracker) directly into the desktop application context.
 
-This guide provides both an automated patch script and manual instructions to enable Claude Counter inside the Claude Desktop application.
+This guide provides both automated patching scripts and manual steps to enable the token counter inside the Claude Desktop application for macOS and Windows.
+
+---
+[← Back to Main Repository Guide](README.md)
+---
 
 ---
 

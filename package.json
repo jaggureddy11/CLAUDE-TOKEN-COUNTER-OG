@@ -1,7 +1,7 @@
 {
   "name": "Claude Token Counter",
   "version": "1.1.0",
-  "description": "Shows token count, cache timer, and usage bars on claude.ai.",
+  "description": "Real-time token counter, prompt cache countdown, and limit tracker for Claude.ai (Web browser extension & Claude Desktop app).",
   "main": "scripts/patch-desktop.js",
   "scripts": {
     "patch": "node scripts/patch-desktop.js"

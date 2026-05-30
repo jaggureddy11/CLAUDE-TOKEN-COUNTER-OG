@@ -2,6 +2,8 @@
   <img src="./icons/title-v3.svg" alt="  CLAUDE TOKEN COUNTER" width="600">
 </p>
 
+<h1 align="center">Claude Token Counter &amp; Desktop Tracker</h1>
+
 <p align="center">
   <img src="https://img.shields.io/github/package-json/v/jaggureddy11/CLAUDE-TOKEN-COUNTER-OG?style=for-the-badge&color=2c84db&label=Version" alt="Release Version">
   <img src="https://img.shields.io/github/license/jaggureddy11/CLAUDE-TOKEN-COUNTER-OG?style=for-the-badge&color=5aa6ff&label=License" alt="License">
@@ -12,7 +14,7 @@
 ---
 
 <p align="center">
-  <b>A sleek, lightweight, and modern utility that brings real-time token counts, cache countdowns, and exact rolling usage analytics directly into your Claude.ai interface (Web & Desktop).</b>
+  <b>A sleek, lightweight, and modern browser extension/userscript to show real-time Claude token count, cache countdowns, and exact rolling usage analytics directly in your Claude.ai interface (Chrome, Brave, and Claude Desktop app).</b>
 </p>
 
 <p align="center">
@@ -85,9 +87,11 @@ Choose your preferred way to run Claude Counter:
 
 ---
 
-### 🖥️ 4. Claude Desktop Application (macOS & Windows)
+### 🖥️ 4. Claude Desktop Application (Claude Counter Desktop)
 
-You can run the token counter inside the official **Claude Desktop** client using our automated scripts.
+To track your **Claude token count on the Claude Desktop app**, you can patch the application packaged assets to inject the counter locally. Check out the detailed [Claude Counter Desktop Setup Guide](DESKTOP.md) for full manual instructions.
+
+You can run the token counter inside the official **Claude Desktop** client using our automated scripts:
 
 1. **Download & Extract:** [Download the project ZIP](https://github.com/jaggureddy11/CLAUDE-TOKEN-COUNTER-OG/archive/refs/heads/main.zip) and unzip it on your computer.
 2. **Run Patcher:** *(Requires [Node.js](https://nodejs.org/) installed)*
